@@ -1,0 +1,12 @@
+<div class="todo-header">
+    <h2>TODO</h2>
+</div>
+<div class="input-field">
+    <input type="text" id="input" placeholder="Add Task" autocomplete="off" [(ngModel)]="inputValue">
+    <button class="addButton" (click)="addTask()">+</button>
+</div>
+<div class="items">
+    <ul>
+        <app-todo-list-item></app-todo-list-item>
+    </ul>
+</div>
