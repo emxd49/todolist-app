@@ -2,16 +2,6 @@
   <div class="todo-header">
     <h2>TODO</h2>
   </div>
-  <div class="input-field">
-    <input type="text" id="input" [(ngModel)]="taskName" placeholder="Add Task" autocomplete="off" />
-    <button class="addButton" (click)="addTask()">+</button>
-  </div>
-  <ul id="list">
-    <li *ngFor="let task of tasks">
-      <input type="checkbox" class="checkbox" (click)="checkTask(task.id)" [checked]="task.completed">
-      <span  [ngClass]="{'line-through': task.completed}" class="input-data">{{task.name}}</span>
-      <!-- <img src="https://img.icons8.com/ios-filled/50/edit--v1.png" alt="edit--v1" class="edit-item" onclick="editTask(event)"> -->
-      <span class="delete-item" (click)="removeTask(task.id)">x</span>
-    </li>
-  </ul>
+  <app-todo-input (addTaskEvent)="addTask($event)"></app-todo-input>
+  <app-todo-list [tasks]="tasks" (removeTaskEvent)="removeTask($event)" (checkTaskEvent)="checkTask($event)"></app-todo-list>
 </div>

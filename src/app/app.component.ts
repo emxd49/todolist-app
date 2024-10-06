@@ -11,7 +11,6 @@ export class AppComponent {
   title = 'todo-app';
   taskName: string = '';
   tasks: ITask[] = [];
-  filteredTasks: ITask[] = [];
   constructor(private toDoService: TodoService) {}
   ngOnInit() {
     this.loadTasks();
@@ -19,27 +18,21 @@ export class AppComponent {
   loadTasks() {
     this.toDoService.getTasks().subscribe((data) => {
       this.tasks = data;
-      this.filteredTasks = data;
       console.log(data);
     });
   }
-  addTask() {
-    if (this.taskName == '') {
-      alert('Empty!');
-      return;
-    }
+  addTask(taskName: string) {
     const newTask: ITask = {
       id: crypto.randomUUID(),
-      name: this.taskName,
+      name: taskName,
       completed: false,
     };
-    this.taskName = '';
     this.toDoService.addTasks(newTask).subscribe((data) => {
       console.log('Task Added', data);
       this.loadTasks();
     });
   }
-  removeTask(id: any) {
+  removeTask(id: string) {
     this.toDoService.deleteTasks(id).subscribe(() => {
       console.log('Data Deleted');
       this.loadTasks();
